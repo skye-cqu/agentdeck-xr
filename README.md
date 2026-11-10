@@ -2,6 +2,12 @@
 
 **Spatial agent workbench for Meta VR — watch an AI agent think, plan, and act in your room.**
 
+**Live demo (GitHub Pages): https://skye-cqu.github.io/agentdeck-xr/**
+
+Architecture in one line: *browser/Quest → IWSDK World (Three.js ECS) → AgentConsoleSystem →
+AgentRuntime (`src/agent/loop.ts`: intent → plan → act → trace) → LLM provider (OpenAI-compatible,
+mock fallback) → tool registry → SceneCommands → 3D task-card rail + console panel.*
+
 > One-line pitch (Agentic Interaction track, Meta VR Start Developer Competition 2026):
 > *AgentDeck turns a VR workbench into a live agent observatory — every intent is parsed, planned
 > (real LLM or deterministic fallback), executed as spatial tool calls (task cards materialize on a
@@ -93,6 +99,16 @@ public/
 Roadmap to submission (Nov 18, 2026, 12:00 PST): hands-first interactions (pinch to grab cards),
 WebXR speech recognition wired to `dispatchVoice`, multi-agent roles on the rail, <3 min capture
 video via IWER + Quest screencast.
+
+## Known issues
+
+- **2D desktop uikit button clicks**: the spatial console's Horizon-kit buttons are hit-tested by
+  IWSDK's CanvasPointerSystem; in some desktop environments (notably automation Chrome) the
+  pointer chain does not reach the panel, with zero console errors. In XR sessions rays are the
+  input path (unaffected). For plain-2D sessions the DOM control bar (`src/2d-controls.ts`,
+  bottom-left) drives the same `window.agentdeck.dispatch()` entry point.
+- Scene-editor `framingRole` accepts only `content` | `support` (anything else fails the whole
+  scene document validation at dev startup).
 
 ## Sources
 
