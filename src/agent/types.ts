@@ -10,6 +10,22 @@
 /** Phases of the decision loop, rendered on the console status line. */
 export type Phase = 'idle' | 'intake' | 'plan' | 'act' | 'trace';
 
+/** Visible crew roles. Each intent is delegated across the crew. */
+export type AgentRole = 'planner' | 'runner' | 'fixer';
+
+export const ROLE_LABEL: Record<AgentRole, string> = {
+  planner: 'Planner',
+  runner: 'Runner',
+  fixer: 'Fixer',
+};
+
+/** What one crew member is doing right now (drives avatar + panel row). */
+export interface AgentActivity {
+  role: AgentRole;
+  phase: Phase | 'idle';
+  summary: string;
+}
+
 /** One incoming user request. Voice input lands here as text (stub for now). */
 export interface Intent {
   id: number;

@@ -6,10 +6,10 @@
  * testable and lets future voice/2D clients reuse the same loop unchanged.
  */
 
-import type { ActionResult, TaskCardState, ToolCall } from './types.js';
+import type { ActionResult, AgentRole, TaskCardState, ToolCall } from './types.js';
 
 export type SceneCommand =
-  | { kind: 'spawn-card'; title: string; priority: TaskCardState['priority'] }
+  | { kind: 'spawn-card'; title: string; priority: TaskCardState['priority']; owner: AgentRole }
   | { kind: 'clear-cards' }
   | { kind: 'pulse-act' };
 
@@ -31,17 +31,26 @@ export function createToolRegistry(stats: () => { open: number; done: number }):
 } {
   const registry: Record<string, ToolExecutor> = {
     plan_day: () => ({
-      commands: [{ kind: 'pulse-act' }],
+      commands: [
+        { kind: 'pulse-act' },
+        { kind: 'spawn-card', title: 'Review inbox', priority: 'normal', owner: 'planner' },
+        { kind: 'spawn-card', title: 'Deep work block', priority: 'high', owner: 'runner' },
+      ],
       result: {
         ok: true,
         summary:
-          'Daily plan drafted: 1) review inbox, 2) deep work block, 3) wrap-up review. ' +
-          'Two focus tasks pinned as cards.',
+          'Daily plan drafted: 1) review inbox (Planner), 2) deep work block (Runner). ' +
+          'Focus tasks pinned as cards on the crew rail.',
       },
     }),
     spawn_task: (args) => ({
       commands: [
-        { kind: 'spawn-card', title: asString(args.title, 'New task'), priority: asPriority(args.priority) },
+        {
+          kind: 'spawn-card',
+          title: asString(args.title, 'New task'),
+          priority: asPriority(args.priority),
+          owner: 'runner',
+        },
       ],
       result: { ok: true, summary: `Task card spawned: "${asString(args.title, 'New task')}".` },
     }),

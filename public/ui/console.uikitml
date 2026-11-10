@@ -80,6 +80,16 @@
     color: #6b7280;
   }
 
+  .crew {
+    color: #3a3b40;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .crew:dark {
+    color: #e5e7eb;
+  }
+
   .hint {
     color: #6b7280;
     font-size: 12px;
@@ -121,8 +131,10 @@
     <div class="trace-dim" id="trace-1">-</div>
     <div class="trace-dim" id="trace-2">-</div>
     <div class="trace-dim" id="trace-3">-</div>
-    <div class="trace-dim" id="trace-4">-</div>
-    <div class="trace-dim" id="trace-5">-</div>
+    <div class="label">CREW</div>
+    <div class="crew" id="crew-planner">Planner: IDLE - waiting for intent</div>
+    <div class="crew" id="crew-runner">Runner: IDLE - standing by</div>
+    <div class="crew" id="crew-fixer">Fixer: IDLE - standing by</div>
     <div class="label" id="cards-text">TASK CARDS: 0 open / 0 done</div>
   </div>
   <div class="button-row">

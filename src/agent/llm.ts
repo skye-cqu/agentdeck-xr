@@ -100,11 +100,8 @@ export function localPlan(intentText: string, context: PlanContext): Plan {
       if (rest.length > 0) args.title = rest.slice(0, 48);
       if (lower.includes('urgent') || lower.includes('high')) args.priority = 'high';
     }
+    // plan_day spawns its own crew cards (Planner + Runner columns).
     steps.push({ tool: match.tool, args });
-    if (match.tool === 'plan_day') {
-      steps.push({ tool: 'spawn_task', args: { title: 'Review inbox', priority: 'normal' } });
-      steps.push({ tool: 'spawn_task', args: { title: 'Deep work block', priority: 'high' } });
-    }
   } else {
     steps.push({ tool: 'report_status', args: {} });
   }

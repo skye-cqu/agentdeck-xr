@@ -5,7 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defineComponents } from '@iwsdk/core';
+import { createComponent, defineComponents, Types } from '@iwsdk/core';
 import { Robot } from './robot-component.js';
 
-export default defineComponents([Robot]);
+/** Tags a spawned task-card mesh for the crew system (owner column + claim). */
+export const CrewCard = createComponent('CrewCard', {
+  title: { type: Types.String, default: '' },
+  /** Planner | Runner | Fixer column owner. */
+  owner: { type: Types.String, default: 'runner' },
+  claimed: { type: Types.Boolean, default: false },
+});
+
+export default defineComponents([Robot, CrewCard]);
