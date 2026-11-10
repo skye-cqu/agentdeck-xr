@@ -548,7 +548,7 @@
   {
    "id": "agent-console",
    "name": "Agent Console",
-   "framingRole": "product",
+   "framingRole": "content",
    "content": {
     "type": "asset",
     "asset": "agent-console"
