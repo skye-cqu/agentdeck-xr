@@ -1,0 +1,144 @@
+<!--
+  AgentDeck XR - spatial agent console.
+  Panel, Button, ButtonLabel come from the bundled Horizon kit.
+  Element ids are wired at runtime from src/agent-console.ts:
+    phase-text, intent-text, plan-text, result-text, cards-text,
+    trace-0..trace-5, btn-plan-day, btn-add-card, btn-status, btn-clear.
+-->
+<style>
+  .panel-root {
+    flex-direction: column;
+    width: 460px;
+  }
+
+  .panel-content {
+    flex-direction: column;
+    gap: 5px;
+    padding: 18px;
+  }
+
+  .eyebrow {
+    color: #6b5a00;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+  }
+
+  .eyebrow:dark {
+    color: #f5d90a;
+  }
+
+  .phase {
+    color: #1c1d20;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .phase:dark {
+    color: #fafaf7;
+  }
+
+  .label {
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+  }
+
+  .label:dark {
+    color: #9ca3af;
+  }
+
+  .value {
+    color: #3a3b40;
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .value:dark {
+    color: #dddfe3;
+  }
+
+  .trace {
+    color: #3a3b40;
+    font-size: 13px;
+    line-height: 17px;
+  }
+
+  .trace:dark {
+    color: #b9c0cb;
+  }
+
+  .trace-dim {
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 17px;
+  }
+
+  .trace-dim:dark {
+    color: #6b7280;
+  }
+
+  .hint {
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .hint:dark {
+    color: #6b7280;
+  }
+
+  .button-row {
+    flex-direction: row;
+    gap: 8px;
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-bottom: 6px;
+  }
+
+  .button {
+    width: 106px;
+  }
+
+  .button-label {
+    font-size: 15px;
+  }
+</style>
+<Panel class="panel-root">
+  <div class="panel-content">
+    <div class="eyebrow">AGENTDECK // SPATIAL AGENT CONSOLE</div>
+    <div class="phase" id="phase-text">IDLE - waiting for intent</div>
+    <div class="label">INTENT</div>
+    <div class="value" id="intent-text">-</div>
+    <div class="label">PLAN</div>
+    <div class="value" id="plan-text">No plan yet - dispatch an intent.</div>
+    <div class="label">RESULT</div>
+    <div class="value" id="result-text">-</div>
+    <div class="label">TRACE (intent - plan - act)</div>
+    <div class="trace-dim" id="trace-0">-</div>
+    <div class="trace-dim" id="trace-1">-</div>
+    <div class="trace-dim" id="trace-2">-</div>
+    <div class="trace-dim" id="trace-3">-</div>
+    <div class="trace-dim" id="trace-4">-</div>
+    <div class="trace-dim" id="trace-5">-</div>
+    <div class="label" id="cards-text">TASK CARDS: 0 open / 0 done</div>
+  </div>
+  <div class="button-row">
+    <Button class="button" id="btn-plan-day">
+      <ButtonLabel class="button-label">Plan day</ButtonLabel>
+    </Button>
+    <Button class="button" id="btn-add-card">
+      <ButtonLabel class="button-label">Add task</ButtonLabel>
+    </Button>
+  </div>
+  <div class="button-row">
+    <Button class="button" id="btn-status">
+      <ButtonLabel class="button-label">Status</ButtonLabel>
+    </Button>
+    <Button class="button" id="btn-clear">
+      <ButtonLabel class="button-label">Clear</ButtonLabel>
+    </Button>
+  </div>
+</Panel>
