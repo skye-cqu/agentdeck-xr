@@ -10,6 +10,7 @@ import projectOptions from 'virtual:iwsdk-project';
 import { AgentConsoleSystem } from './agent-console.js';
 import { PanelSystem } from './panel.js';
 import { RobotSystem } from './robot.js';
+import { mount2DControls } from './2d-controls.js';
 
 World.create(
   document.getElementById('scene-container') as HTMLDivElement,
@@ -18,4 +19,5 @@ World.create(
   world.registerSystem(RobotSystem);
   world.registerSystem(PanelSystem);
   world.registerSystem(AgentConsoleSystem);
+  mount2DControls();
 });

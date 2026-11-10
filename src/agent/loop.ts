@@ -133,6 +133,9 @@ export class AgentRuntime {
             state: 'queued',
           };
           this.cards.push(card);
+          // 'command' drives the spatial system (card mesh spawn); 'card'
+          // carries the runtime state for data clients (UI counters, tests).
+          this.emit('command', command);
           this.emit('card', card);
           break;
         }

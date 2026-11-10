@@ -9,7 +9,10 @@ import { iwsdkDev } from '@iwsdk/vite-plugin-dev';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [iwsdkDev()],
+  // IWSDK_HTTPS=off disables the plugin's local HTTPS (self-signed cert) for
+  // headless browser testing; http://localhost is still a secure context, so
+  // WebXR/IWER keep working. Production always serves HTTPS (GitHub Pages).
+  plugins: [iwsdkDev({ https: process.env.IWSDK_HTTPS === 'off' ? false : true })],
   server: { host: '0.0.0.0', port: 8081, open: false },
   build: {
     outDir: 'dist',
